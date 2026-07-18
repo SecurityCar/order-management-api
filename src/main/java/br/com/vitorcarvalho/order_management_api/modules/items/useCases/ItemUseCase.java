@@ -1,18 +1,23 @@
 package br.com.vitorcarvalho.order_management_api.modules.items.useCases;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import br.com.vitorcarvalho.order_management_api.modules.exceptions.ItemNotFoundException;
 import br.com.vitorcarvalho.order_management_api.modules.items.ItemEntity;
+import br.com.vitorcarvalho.order_management_api.modules.items.mappers.ItemMapper;
 import br.com.vitorcarvalho.order_management_api.modules.items.repositories.ItemRepository;
 
 @Service
 public class ItemUseCase {
     private ItemRepository itemRepository;
+    private ItemMapper itemMapper;
 
-    ItemUseCase(ItemRepository itemRepository){
+    ItemUseCase(ItemRepository itemRepository, ItemMapper itemMapper){
         this.itemRepository = itemRepository;
+        this.itemMapper = itemMapper;
     }
 
     public List<ItemEntity> findAll(){
@@ -27,5 +32,14 @@ public class ItemUseCase {
             return this.itemRepository.findByCategoryContainingIgnoreCase(category.toUpperCase());
         }
         return this.itemRepository.findAll();
+    }
+
+    public ItemEntity update(UUID id, ItemEntity updatedItem){
+        ItemEntity item = itemRepository.findById(id).orElseThrow(
+            () -> new ItemNotFoundException()
+        );
+
+        itemMapper.updateEntityFromDTO(updatedItem, item);
+        return itemRepository.save(item);
     }
 }

@@ -1,6 +1,7 @@
 package br.com.vitorcarvalho.order_management_api.modules.items.controllers;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,9 @@ import br.com.vitorcarvalho.order_management_api.modules.items.useCases.ItemUseC
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 
@@ -44,5 +48,9 @@ public class ItemController {
         return ResponseEntity.ok(items);
     }
     
-    
+    @PutMapping("/{id}")
+    public ResponseEntity<ItemEntity> update(@PathVariable UUID id, @RequestBody ItemEntity itemEntity) {
+        ItemEntity updatedItem = this.itemUseCase.update(id, itemEntity);
+        return ResponseEntity.ok(updatedItem);
+    }
 }
