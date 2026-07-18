@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.vitorcarvalho.order_management_api.modules.items.ItemEntity;
+import br.com.vitorcarvalho.order_management_api.modules.items.dto.UpdateItemRequest;
 import br.com.vitorcarvalho.order_management_api.modules.items.repositories.ItemRepository;
 import br.com.vitorcarvalho.order_management_api.modules.items.useCases.ItemUseCase;
 import io.swagger.v3.oas.annotations.Operation;
@@ -49,8 +50,8 @@ public class ItemController {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<ItemEntity> update(@PathVariable UUID id, @RequestBody ItemEntity itemEntity) {
-        ItemEntity updatedItem = this.itemUseCase.update(id, itemEntity);
+    public ResponseEntity<ItemEntity> update(@PathVariable UUID id, @Valid @RequestBody UpdateItemRequest updatedItemRequest) {
+        ItemEntity updatedItem = this.itemUseCase.update(id, updatedItemRequest);
         return ResponseEntity.ok(updatedItem);
     }
 }
