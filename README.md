@@ -12,6 +12,7 @@ Sistema de gerenciamento de pedidos de uma loja.
 ## ⌛ Estado do Projeto
 - [ ] CRUD de itens (em andamento)
 - [ ] CRUD de usuários
+- [ ] Autenticação e Autorização
 - [ ] Sistema de carrinho
 
 ## 🛠 Tecnologias
