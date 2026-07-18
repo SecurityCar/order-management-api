@@ -13,8 +13,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
 @Data
@@ -25,9 +27,12 @@ public class ItemEntity {
     private UUID id;
 
     @NotBlank
+    @Column(nullable = false)
     private String name;
 
-    private String description;
+    @NotBlank
+    @Column(nullable = false)
+    private String category;
 
     @NotNull
     @DecimalMin(value = "0.01", message = "The price has to be greater than zero.")
@@ -35,6 +40,8 @@ public class ItemEntity {
     private BigDecimal price;
 
     @NotNull
+    @Positive(message = "The quantity has to be at least one.")
+    @Min(value = 1, message = "The quantity has to be at least one.")
     private Integer quantity;
 
     @UpdateTimestamp
