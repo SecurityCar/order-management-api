@@ -1,13 +1,18 @@
 package br.com.vitorcarvalho.order_management_api.modules.items.mappers;
 
+import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import br.com.vitorcarvalho.order_management_api.modules.items.ItemEntity;
-import br.com.vitorcarvalho.order_management_api.modules.items.dto.PatchedItemRequest;
+import br.com.vitorcarvalho.order_management_api.modules.items.dto.PatchItemRequest;
+import br.com.vitorcarvalho.order_management_api.modules.items.dto.UpdateItemRequest;
 
-@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Mapper(componentModel = "spring")
 public interface ItemMapper {
-    void patchEntityFromDTO(PatchedItemRequest dto, @MappingTarget ItemEntity destino);
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void patchEntityFromDTO(PatchItemRequest dto, @MappingTarget ItemEntity destity);
+
+    void updateEntityFromDTO(UpdateItemRequest dto, @MappingTarget ItemEntity destiny);
 }

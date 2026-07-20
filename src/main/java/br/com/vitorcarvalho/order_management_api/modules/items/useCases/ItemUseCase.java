@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.vitorcarvalho.order_management_api.modules.exceptions.ItemNotFoundException;
 import br.com.vitorcarvalho.order_management_api.modules.items.ItemEntity;
-import br.com.vitorcarvalho.order_management_api.modules.items.dto.PatchedItemRequest;
+import br.com.vitorcarvalho.order_management_api.modules.items.dto.PatchItemRequest;
+import br.com.vitorcarvalho.order_management_api.modules.items.dto.UpdateItemRequest;
 import br.com.vitorcarvalho.order_management_api.modules.items.mappers.ItemMapper;
 import br.com.vitorcarvalho.order_management_api.modules.items.repositories.ItemRepository;
 
@@ -35,12 +36,21 @@ public class ItemUseCase {
         return this.itemRepository.findAll();
     }
 
-    public ItemEntity patch(UUID id, PatchedItemRequest patchedItem){
+    public ItemEntity patch(UUID id, PatchItemRequest patchedItem){
         ItemEntity item = itemRepository.findById(id).orElseThrow(
             () -> new ItemNotFoundException()
         );
 
         itemMapper.patchEntityFromDTO(patchedItem, item);
+        return itemRepository.save(item);
+    }
+
+    public ItemEntity update(UUID id, UpdateItemRequest updatedItem){
+        ItemEntity item = itemRepository.findById(id).orElseThrow(
+            () -> new ItemNotFoundException()
+        );
+
+        itemMapper.updateEntityFromDTO(updatedItem, item);
         return itemRepository.save(item);
     }
 

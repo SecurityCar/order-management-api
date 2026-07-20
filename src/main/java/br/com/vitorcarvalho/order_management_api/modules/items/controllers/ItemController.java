@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.vitorcarvalho.order_management_api.modules.items.ItemEntity;
-import br.com.vitorcarvalho.order_management_api.modules.items.dto.PatchedItemRequest;
+import br.com.vitorcarvalho.order_management_api.modules.items.dto.PatchItemRequest;
+import br.com.vitorcarvalho.order_management_api.modules.items.dto.UpdateItemRequest;
 import br.com.vitorcarvalho.order_management_api.modules.items.repositories.ItemRepository;
 import br.com.vitorcarvalho.order_management_api.modules.items.useCases.ItemUseCase;
 import io.swagger.v3.oas.annotations.Operation;
@@ -53,9 +54,16 @@ public class ItemController {
     
     @PatchMapping("/{id}")
     @Operation(summary = "Patch", description = "This function is responsible for updating partially an item by ID.")
-    public ResponseEntity<ItemEntity> patch(@PathVariable UUID id, @Valid @RequestBody PatchedItemRequest updatedItemRequest) {
-        ItemEntity patchedItem = this.itemUseCase.patch(id, updatedItemRequest);
+    public ResponseEntity<ItemEntity> patch(@PathVariable UUID id, @Valid @RequestBody PatchItemRequest patchedItemRequest) {
+        ItemEntity patchedItem = this.itemUseCase.patch(id, patchedItemRequest);
         return ResponseEntity.ok(patchedItem);
+    }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Update", description = "This funcion is responsible for updating an item by ID.")
+    public ResponseEntity<ItemEntity> update(@PathVariable UUID id, @Valid @RequestBody UpdateItemRequest updatedItemRequest) {
+        ItemEntity updatedItem = this.itemUseCase.update(id, updatedItemRequest);
+        return ResponseEntity.ok(updatedItem);
     }
 
     @DeleteMapping("/{id}")
