@@ -6,6 +6,7 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import br.com.vitorcarvalho.order_management_api.modules.items.ItemEntity;
+import br.com.vitorcarvalho.order_management_api.modules.items.dto.CreateItemRequest;
 import br.com.vitorcarvalho.order_management_api.modules.items.dto.PatchItemRequest;
 import br.com.vitorcarvalho.order_management_api.modules.items.dto.UpdateItemRequest;
 
@@ -15,4 +16,6 @@ public interface ItemMapper {
     void patchEntityFromDTO(PatchItemRequest dto, @MappingTarget ItemEntity destity);
 
     void updateEntityFromDTO(UpdateItemRequest dto, @MappingTarget ItemEntity destiny);
+
+    ItemEntity toEntity(CreateItemRequest dto);
 }

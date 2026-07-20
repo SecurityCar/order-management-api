@@ -3,6 +3,9 @@ package br.com.vitorcarvalho.order_management_api.modules.items.controllers;
 import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.vitorcarvalho.order_management_api.modules.items.ItemEntity;
+import br.com.vitorcarvalho.order_management_api.modules.items.dto.CreateItemRequest;
 import br.com.vitorcarvalho.order_management_api.modules.items.dto.PatchItemRequest;
 import br.com.vitorcarvalho.order_management_api.modules.items.dto.UpdateItemRequest;
 import br.com.vitorcarvalho.order_management_api.modules.items.repositories.ItemRepository;
@@ -41,8 +45,9 @@ public class ItemController {
 
     @PostMapping("/")
     @Operation(summary = "Registration", description = "This function is responsible for recording the items.")
-    public ItemEntity create(@Valid @RequestBody ItemEntity itemEntity) {
-        return this.itemRepository.save(itemEntity);
+    public ResponseEntity<ItemEntity> create(@Valid @RequestBody CreateItemRequest createdItem) {
+        ItemEntity item = this.itemUseCase.create(createdItem);
+        return ResponseEntity.status(HttpStatus.CREATED).body(item);
     }
 
     @GetMapping("")
