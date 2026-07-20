@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
 @Data
-public class UpdateItemRequest {
+public class PatchedItemRequest {
     
     @DecimalMin(value = "0.01", message = "The price has to be greater than zero.")
     private BigDecimal price;
