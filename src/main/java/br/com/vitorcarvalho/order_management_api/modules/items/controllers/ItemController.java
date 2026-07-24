@@ -68,7 +68,7 @@ public class ItemController {
     @Operation(summary = "Patch", description = "This function is responsible for updating partially an item by ID.")
     @ApiResponses({
         @ApiResponse(responseCode = "200", description = "The item was patched with success!"),
-        @ApiResponse(responseCode = "400", description = "Please verify the ID provided.")
+        @ApiResponse(responseCode = "404", description = "Please verify the ID provided.")
     })
     public ResponseEntity<ItemEntity> patch(@PathVariable UUID id, @Valid @RequestBody PatchItemRequest patchedItemRequest) {
         ItemEntity patchedItem = this.itemUseCase.patch(id, patchedItemRequest);
@@ -79,7 +79,7 @@ public class ItemController {
     @Operation(summary = "Update", description = "This funcion is responsible for updating an item by ID.")
     @ApiResponses({
         @ApiResponse(responseCode = "200", description = "The item was updated with success!"),
-        @ApiResponse(responseCode = "400", description = "Please verify the ID provided.")
+        @ApiResponse(responseCode = "404", description = "Please verify the ID provided.")
     })
     public ResponseEntity<ItemEntity> update(@PathVariable UUID id, @Valid @RequestBody UpdateItemRequest updatedItemRequest) {
         ItemEntity updatedItem = this.itemUseCase.update(id, updatedItemRequest);
@@ -90,7 +90,7 @@ public class ItemController {
     @Operation(summary = "Delete", description = "This function is responsible for deleting an item by ID.")
     @ApiResponses({
         @ApiResponse(responseCode = "200", description = "The item was deleted with success!"),
-        @ApiResponse(responseCode = "400", description = "Please verify the ID provided.")
+        @ApiResponse(responseCode = "404", description = "Please verify the ID provided.")
     })
     public void delete(@PathVariable UUID id){
         itemUseCase.delete(id);
