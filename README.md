@@ -7,6 +7,7 @@ Sistema de gerenciamento de pedidos de uma loja.
 ## 📌 Funcionalidades
 - Cadastro, listagem, atualização e remoção de itens
 - Cadastro, listagem, atualização e remoção de usuários
+- Admin com propriedades especiais
 - Sistema de carrinho
 
 ## 🎢 Estrutura do Projeto
