@@ -1,0 +1,22 @@
+package br.com.vitorcarvalho.order_management_api.modules.user.dto;
+
+import org.hibernate.validator.constraints.Length;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+
+@Data
+public class CreateUserRequest {
+    
+    @NotBlank(message = "The name is mandatory.")
+    private String name;
+
+    @NotBlank(message = "The e-mail is mandatory.")
+    @Email
+    private String email;
+
+    @NotBlank(message = "The password is mandatory.")
+    @Length(min = 10, max = 100, message = "The password's length has to be between 10 and 100 characters.")
+    private String password;
+}
