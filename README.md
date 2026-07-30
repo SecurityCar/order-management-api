@@ -17,9 +17,11 @@ Decidi fazer a arquitetura tradicional (Controller -> Service -> Repositories ->
 ## ⌛ Estado do Projeto
 - [x] CRUD de itens
 - [x] CRUD de usuários
-- [ ] Criptografia de senhas(em andamento)
-- [ ] Autenticação e Autorização
+- [x] Criptografia de senhas
+- [ ] Autenticação e Autorização(em andamento)
 - [ ] Sistema de carrinho
+- [ ] Testes Unitários
+- [ ] Testes de Integração
 
 ## 🛠 Tecnologias
 - Java 17
