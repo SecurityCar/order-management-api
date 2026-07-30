@@ -15,8 +15,9 @@ Sistema de gerenciamento de pedidos de uma loja.
 Decidi fazer a arquitetura tradicional (Controller -> Service -> Repositories -> Data Base) pois é simples e tem uma estrutura um tanto sólida para esse projeto.
 
 ## ⌛ Estado do Projeto
-- [ ] CRUD de itens (em andamento)
-- [ ] CRUD de usuários
+- [x] CRUD de itens
+- [x] CRUD de usuários
+- [ ] Criptografia de senhas(em andamento)
 - [ ] Autenticação e Autorização
 - [ ] Sistema de carrinho
 
