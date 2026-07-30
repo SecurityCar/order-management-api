@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.vitorcarvalho.order_management_api.modules.user.UserEntity;
 import br.com.vitorcarvalho.order_management_api.modules.user.dto.CreateUserRequest;
+import br.com.vitorcarvalho.order_management_api.modules.user.dto.DeleteUserRequest;
 import br.com.vitorcarvalho.order_management_api.modules.user.dto.PatchUserRequest;
 import br.com.vitorcarvalho.order_management_api.modules.user.service.UserService;
 import jakarta.validation.Valid;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,5 +51,10 @@ public class UserController {
     public ResponseEntity<UserEntity> patch(@PathVariable UUID id, @Valid @RequestBody PatchUserRequest dto){
         UserEntity patchedUser = this.userService.patch(id, dto);
         return ResponseEntity.ok(patchedUser);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable UUID id, @Valid @RequestBody DeleteUserRequest dto){
+        this.userService.delete(id, dto);
     }
 }

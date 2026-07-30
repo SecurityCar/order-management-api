@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.vitorcarvalho.order_management_api.modules.exceptions.UserNotFoundException;
 import br.com.vitorcarvalho.order_management_api.modules.user.UserEntity;
 import br.com.vitorcarvalho.order_management_api.modules.user.dto.CreateUserRequest;
+import br.com.vitorcarvalho.order_management_api.modules.user.dto.DeleteUserRequest;
 import br.com.vitorcarvalho.order_management_api.modules.user.dto.PatchUserRequest;
 import br.com.vitorcarvalho.order_management_api.modules.user.mappers.UserMapper;
 import br.com.vitorcarvalho.order_management_api.modules.user.repositories.UserRepository;
@@ -40,5 +41,14 @@ public class UserService {
         );
         this.userMapper.patchUserFromDTO(dto, user);
         return this.userRepository.save(user);
+    }
+
+    public void delete(UUID id, DeleteUserRequest dto){
+        UserEntity user = this.userRepository.findById(id).orElseThrow(
+            () -> new UserNotFoundException()
+        );
+
+        user.setActive(false);
+        this.userRepository.save(user);
     }
 }

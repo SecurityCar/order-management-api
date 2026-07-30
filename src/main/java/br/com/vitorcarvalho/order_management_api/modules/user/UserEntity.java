@@ -32,6 +32,9 @@ public class UserEntity {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private boolean active = true;
+    
     @CreationTimestamp
     private LocalDateTime createdAt;
     @UpdateTimestamp
