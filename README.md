@@ -8,6 +8,7 @@ Sistema de gerenciamento de pedidos de uma loja.
 - Cadastro, listagem, atualização e remoção de itens
 - Cadastro, listagem, atualização e remoção de usuários
 - Admin com propriedades especiais
+- Geração de imagens de com IA
 - Sistema de carrinho
 
 ## 🎢 Estrutura do Projeto
