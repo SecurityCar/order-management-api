@@ -1,5 +1,7 @@
 package br.com.vitorcarvalho.order_management_api.modules.user.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import br.com.vitorcarvalho.order_management_api.modules.user.UserEntity;
@@ -20,5 +22,12 @@ public class UserService {
     public UserEntity create(CreateUserRequest dto){
         UserEntity user = this.userMapper.toEntity(dto);
         return this.userRepository.save(user);
+    }
+
+    public List<UserEntity> findByFilter(String name){
+        if(name != null){
+            return this.userRepository.findByNameContainingIgnoreCase(name);
+        }
+        return this.userRepository.findAll();
     }
 }
