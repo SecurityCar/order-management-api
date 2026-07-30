@@ -15,6 +15,8 @@ import br.com.vitorcarvalho.order_management_api.modules.user.UserEntity;
 import br.com.vitorcarvalho.order_management_api.modules.user.dto.CreateUserRequest;
 import br.com.vitorcarvalho.order_management_api.modules.user.dto.DeleteUserRequest;
 import br.com.vitorcarvalho.order_management_api.modules.user.dto.PatchUserRequest;
+import br.com.vitorcarvalho.order_management_api.modules.user.dto.UserResponse;
+import br.com.vitorcarvalho.order_management_api.modules.user.repositories.UserRepository;
 import br.com.vitorcarvalho.order_management_api.modules.user.service.UserService;
 import jakarta.validation.Valid;
 
@@ -36,25 +38,26 @@ public class UserController {
     }
     
     @PostMapping("/") 
-    public ResponseEntity<UserEntity> create(@Valid @RequestBody CreateUserRequest dto){ 
-        UserEntity user = this.userService.create(dto); 
+    public ResponseEntity<UserResponse> create(@Valid @RequestBody CreateUserRequest dto){ 
+        UserResponse user = this.userService.create(dto); 
         return ResponseEntity.status(HttpStatus.CREATED).body(user); 
     }
 
     @GetMapping("")
-    public ResponseEntity<List<UserEntity>> listByFilter(@RequestParam(required = false) String name) {
-        List<UserEntity> users = userService.findByFilter(name);
+    public ResponseEntity<List<UserResponse>> list(@RequestParam(required = false) String name, @RequestParam(required = false) Boolean active) {
+        List<UserResponse> users = userService.findByFilter(name, active);
         return ResponseEntity.ok(users);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<UserEntity> patch(@PathVariable UUID id, @Valid @RequestBody PatchUserRequest dto){
-        UserEntity patchedUser = this.userService.patch(id, dto);
+    public ResponseEntity<UserResponse> patch(@PathVariable UUID id, @Valid @RequestBody PatchUserRequest dto){
+        UserResponse patchedUser = this.userService.patch(id, dto);
         return ResponseEntity.ok(patchedUser);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable UUID id, @Valid @RequestBody DeleteUserRequest dto){
+    public ResponseEntity<Void> delete(@PathVariable UUID id, @Valid @RequestBody DeleteUserRequest dto){
         this.userService.delete(id, dto);
+        return ResponseEntity.noContent().build();
     }
 }

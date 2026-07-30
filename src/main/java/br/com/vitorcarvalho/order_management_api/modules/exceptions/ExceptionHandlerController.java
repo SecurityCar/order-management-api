@@ -36,4 +36,9 @@ public class ExceptionHandlerController {
         ErrorMessageDTO error = new ErrorMessageDTO(ex.getMessage(), "id");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
+
+    @ExceptionHandler(InvalidCredentialException.class)
+    public ResponseEntity<String> handleInvalidCredentialException(InvalidCredentialException ex){
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
+    }
 }
