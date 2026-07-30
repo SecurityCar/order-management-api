@@ -1,6 +1,7 @@
 package br.com.vitorcarvalho.order_management_api.modules.user.controllers;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
@@ -12,9 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.vitorcarvalho.order_management_api.modules.user.UserEntity;
 import br.com.vitorcarvalho.order_management_api.modules.user.dto.CreateUserRequest;
+import br.com.vitorcarvalho.order_management_api.modules.user.dto.PatchUserRequest;
 import br.com.vitorcarvalho.order_management_api.modules.user.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -39,5 +43,10 @@ public class UserController {
         List<UserEntity> users = userService.findByFilter(name);
         return ResponseEntity.ok(users);
     }
-    
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<UserEntity> patch(@PathVariable UUID id, @Valid @RequestBody PatchUserRequest dto){
+        UserEntity patchedUser = this.userService.patch(id, dto);
+        return ResponseEntity.ok(patchedUser);
+    }
 }
