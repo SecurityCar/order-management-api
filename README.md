@@ -32,6 +32,11 @@ Decidi fazer a arquitetura tradicional (Controller -> Service -> Repositories ->
 - SonarQube
 - Swagger
 
+## 🕰️ Timeline
+### Julho 2026
+- CRUD de Usuários
+- CRUD de Itens
+
 ## 📒 Requisitos Mínimos
 
 ## 🧭 Como Rodar o Projeto
